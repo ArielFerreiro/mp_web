@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mp_web/utils/translations.dart';
 import 'package:mp_web/widgets/activity.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -18,28 +19,28 @@ class Activities extends StatelessWidget {
         desktop: 1230,
         watch: 200
       ),
-      desktop: _desktop(),
-      tablet: _tablet(),
-      mobile: _mobile(),
+      desktop: _desktop(context),
+      tablet: _tablet(context),
+      mobile: _mobile(context),
     );
   }
 }
 
-Widget _desktop() {
+Widget _desktop(BuildContext context) {
   return
       Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Activity(icon: Icons.school, title: 'Systems Bachelor', text: 'Flutter, Java, Web, R, Python, SAP,', text2: 'SQL, and a large etc.'),
-          Activity(icon: Icons.work, title: 'Expert in Fields', text: 'Project & Service Management', text2: 'Software Dev. & Data Science.'),
-          Activity(icon: Icons.business, title: 'Business Experience', text: 'Manufacturing, Supply Chain,', text2: 'Brand Integrity & cyber crime.'),
-          Activity(icon: Icons.person, title: 'Look at me as', text: 'Libertarian, resilient, perfectionist,', text2: 'customer oriented & collaborative.'),
+          Activity(icon: Icons.school, title: Translations.of(context).text('systems_bachelor'), text:Translations.of(context).text('is_1'), text2: Translations.of(context).text('is_2')),
+          Activity(icon: Icons.work, title: Translations.of(context).text('expert'), text: Translations.of(context).text('expert_1'), text2:  Translations.of(context).text('expert_2')),
+          Activity(icon: Icons.business, title: Translations.of(context).text('business_experience'), text: Translations.of(context).text('business_1'), text2:  Translations.of(context).text('business_2')),
+          Activity(icon: Icons.person, title: Translations.of(context).text('look_me'), text: Translations.of(context).text('look_1'), text2:  Translations.of(context).text('look_2')),
        ],
   );
 }
 
-Widget _tablet() {
+Widget _tablet(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
@@ -47,37 +48,37 @@ Widget _tablet() {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Activity(icon: Icons.school, title: 'Systems Bachelor', text: 'Flutter, Java, Web, R, Python, SAP,', text2: 'SQL, and a large etc.'),
+          Activity(icon: Icons.school, title: Translations.of(context).text('systems_bachelor'), text:Translations.of(context).text('is_1'), text2: Translations.of(context).text('is_2')),
           SizedBox(height: 20.0,),
-          Activity(icon: Icons.work, title: 'Expert in Fields', text: 'Project & Service Management', text2: 'Software Dev. & Data Science.'),
-        ],
+          Activity(icon: Icons.work, title: Translations.of(context).text('expert'), text: Translations.of(context).text('expert_1'), text2:  Translations.of(context).text('expert_2')),
+       ],
       ),
       SizedBox(width: 20.0, ),
       Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Activity(icon: Icons.business, title: 'Business Experience', text: 'Manufacturing, Supply Chain,', text2: 'Brand Integrity & cyber crime.'),
+              Activity(icon: Icons.business, title: Translations.of(context).text('business_experience'), text: Translations.of(context).text('business_1'), text2:  Translations.of(context).text('business_2')),
               SizedBox(height: 20.0,),
-              Activity(icon: Icons.person, title: 'Look at me as', text: 'Libertarian, resilient, perfectionist,', text2: 'customer oriented & collaborative.'),
+              Activity(icon: Icons.person, title: Translations.of(context).text('look_me'), text: Translations.of(context).text('look_1'), text2:  Translations.of(context).text('look_2')),
             ],
       )
     ],
   );
 }
 
-Widget _mobile() {
+Widget _mobile(BuildContext context) {
     return  Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
       child: Column(
         children: <Widget>[
-            Activity(icon: Icons.school, title: 'Systems Bachelor', text: 'Flutter, Java, Web, R, Python, SAP,', text2: 'SQL, and a large etc.'),
+            Activity(icon: Icons.school, title: Translations.of(context).text('systems_bachelor'), text:Translations.of(context).text('is_1'), text2: Translations.of(context).text('is_2')),
             SizedBox(height: 20.0,),
-            Activity(icon: Icons.work, title: 'Expert in Fields', text: 'Project & Service Management', text2: 'Software Dev. & Data Science.'),
+            Activity(icon: Icons.work, title: Translations.of(context).text('expert'), text: Translations.of(context).text('expert_1'), text2:  Translations.of(context).text('expert_2')),
             SizedBox(height: 20.0,),
-            Activity(icon: Icons.business, title: 'Business Experience', text: 'Manufacturing, Supply Chain,', text2: 'Brand Integrity & cyber crime.'),
+            Activity(icon: Icons.business, title: Translations.of(context).text('business_experience'), text: Translations.of(context).text('business_1'), text2:  Translations.of(context).text('business_2')),
             SizedBox(height: 20.0,),
-            Activity(icon: Icons.person, title: 'Look at me as', text: 'Libertarian, resilient, perfectionist,', text2: 'customer oriented & collaborative.'),
+            Activity(icon: Icons.person, title: Translations.of(context).text('look_me'), text: Translations.of(context).text('look_1'), text2:  Translations.of(context).text('look_2')),
         ],
       ),
     );

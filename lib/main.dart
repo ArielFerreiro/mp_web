@@ -1,7 +1,8 @@
   
 import 'package:flutter/material.dart';
 import 'views/home/home_page.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'utils/translations.dart';
 
 void main() => runApp(WebPageApp());
 
@@ -11,6 +12,15 @@ class WebPageApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Ariel Ferreiro Diaz",
+      localizationsDelegates: [
+        const TranslationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+          const Locale('en', ''),
+          const Locale('es', ''),
+      ],
       home: HomePage(),
       theme: _theme(),
     );

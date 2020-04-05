@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mp_web/utils/translations.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class Identity extends StatelessWidget {
@@ -11,10 +12,10 @@ class Identity extends StatelessWidget {
 
     String moment = "";
     var hour = new DateTime.now().hour;
-    if (hour >=0 && hour < 6) moment = 'Night';
-    if (hour >=6 && hour < 12) moment = 'Morning';
-    if (hour >=12 && hour < 18) moment = 'Afternoon';
-    if (hour >=18 && hour < 24) moment = 'Evening';
+    if (hour >=0 && hour < 6) moment = Translations.of(context).text('night');
+    if (hour >=6 && hour < 12) moment = Translations.of(context).text('morning');
+    if (hour >=12 && hour < 18) moment = Translations.of(context).text('afternoon');
+    if (hour >=18 && hour < 24) moment = Translations.of(context).text('evening');
 
     var name =  RichText(
       text:  TextSpan(
@@ -22,8 +23,8 @@ class Identity extends StatelessWidget {
         // Child text spans will inherit styles from parent
         style: GoogleFonts.openSans(color: Colors.white70, fontSize: 36.0),
         children: <TextSpan>[
-          new TextSpan(text: "I'm "),
-          new TextSpan(text: 'Ariel', style: GoogleFonts.openSans(color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold))
+          new TextSpan(text:Translations.of(context).text('iam')),
+          new TextSpan(text: ' Ariel', style: GoogleFonts.openSans(color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold))
         ],
       ),
     );
@@ -34,14 +35,14 @@ class Identity extends StatelessWidget {
         desktop: 1230,
         watch: 200
       ),
-      desktop: _desktop_tablet(name, moment),
-      tablet: _desktop_tablet(name, moment),
-      mobile: _mobile(name, moment),
+      desktop: _dtablet(name, moment,context),
+      tablet: _dtablet(name, moment,context),
+      mobile: _mobile(name, moment,context),
     );
 
   }
 
-  Widget _desktop_tablet(Widget name, String moment) {
+  Widget _dtablet(Widget name, String moment, BuildContext context) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -68,7 +69,7 @@ class Identity extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                  Text("Good " + moment + ".",
+                  Text(Translations.of(context).text('good') + moment + ".",
                     style: GoogleFonts.openSans(color: Colors.white70, fontSize: 36.0),
                   ),
                   name,
@@ -77,7 +78,7 @@ class Identity extends StatelessWidget {
       ],);
   }
 
-  Widget _mobile(Widget name, String moment) {
+  Widget _mobile(Widget name, String moment,BuildContext context) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +105,7 @@ class Identity extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                  Text("Good " + moment + ".",
+                  Text(Translations.of(context).text('good') + moment + ".",
                     style: GoogleFonts.openSans(color: Colors.white70, fontSize: 36.0),
                   ),
                   name,
