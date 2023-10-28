@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show  rootBundle;
+import 'package:flutter/services.dart' show rootBundle;
 
 class Translations {
   Translations(Locale locale) {
     this.locale = locale;
-    _localizedValues = null;
+    _localizedValues = {};
   }
 
-  Locale locale;
-  static Map<dynamic, dynamic> _localizedValues;
+  late Locale locale;
+  static late Map<dynamic, dynamic> _localizedValues;
 
-  static Translations of(BuildContext context){
+  static Translations? of(BuildContext context) {
     return Localizations.of<Translations>(context, Translations);
   }
 
@@ -22,7 +22,8 @@ class Translations {
 
   static Future<Translations> load(Locale locale) async {
     Translations translations = new Translations(locale);
-    String jsonContent = await rootBundle.loadString("assets/locales/i18n_${locale.languageCode}.json");
+    String jsonContent = await rootBundle
+        .loadString("assets/locales/i18n_${locale.languageCode}.json");
     _localizedValues = json.decode(jsonContent);
     return translations;
   }
@@ -34,7 +35,7 @@ class TranslationsDelegate extends LocalizationsDelegate<Translations> {
   const TranslationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en','fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'fr'].contains(locale.languageCode);
 
   @override
   Future<Translations> load(Locale locale) => Translations.load(locale);

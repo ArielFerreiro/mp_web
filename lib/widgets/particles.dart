@@ -32,7 +32,19 @@ class _ParticlesState extends State<Particles> {
 
   @override
   Widget build(BuildContext context) {
-    return Rendering(
+    return LoopAnimationBuilder<int>(
+      tween: IntTween(begin: 1, end: 30),
+      duration: Duration(seconds: 30),
+      builder: (context, value, _) {
+        Duration duration = Duration(seconds: value);
+        _simulateParticles(duration);
+        return CustomPaint(
+          painter: ParticlePainter(particles, duration),
+        );
+      },
+    );
+
+    /*return Rendering(
       startTime: Duration(seconds: 30),
       onTick: _simulateParticles,
       builder: (context, time) {
@@ -40,7 +52,7 @@ class _ParticlesState extends State<Particles> {
           painter: ParticlePainter(particles, time),
         );
       },
-    );
+    );*/
   }
 
   _simulateParticles(Duration time) {
@@ -49,9 +61,11 @@ class _ParticlesState extends State<Particles> {
 }
 
 class ParticleModel {
-  Animatable tween;
-  double size;
-  AnimationProgress animationProgress;
+  late MovieTween tween;
+  late double size;
+  late double progress;
+  DateTime startTime = DateTime.now();
+  //AnimationProgress animationProgress;
   Random random;
 
   ParticleModel(this.random) {
@@ -63,20 +77,25 @@ class ParticleModel {
     final endPosition = Offset(-0.2 + 1.4 * random.nextDouble(), -0.2);
     final duration = Duration(milliseconds: 20000 + random.nextInt(6000));
 
-    tween = MultiTrackTween([
-      Track("x").add(
-          duration, Tween(begin: startPosition.dx, end: endPosition.dx),
-          curve: Curves.easeInOutSine),
-      Track("y").add(
-          duration, Tween(begin: startPosition.dy, end: endPosition.dy),
-          curve: Curves.easeIn),
-    ]);
-    animationProgress = AnimationProgress(duration: duration, startTime: time);
+    tween = MovieTween()
+      ..tween<double>('x', Tween(begin: startPosition.dx, end: endPosition.dx),
+          curve: Curves.easeInOutSine, duration: duration)
+      ..tween<double>('y', Tween(begin: startPosition.dy, end: endPosition.dy),
+          curve: Curves.easeIn, duration: duration);
+
+    progress = getProgress(duration);
     size = 0.02 + random.nextDouble() * 0.35;
   }
 
+  double getProgress(Duration duration) {
+    final Duration diff = DateTime.now().difference(startTime);
+    return (diff.inMilliseconds / duration.inMilliseconds)
+        .clamp(0.0, 1.0)
+        .toDouble();
+  }
+
   maintainRestart(Duration time) {
-    if (animationProgress.progress(time) == 1.0) {
+    if (getProgress(time) == 1.0) {
       restart(time: time);
     }
   }
@@ -93,10 +112,10 @@ class ParticlePainter extends CustomPainter {
     final paint = Paint()..color = Colors.white.withAlpha(50);
 
     particles.forEach((particle) {
-      var progress = particle.animationProgress.progress(time);
+      var progress = particle.getProgress(time);
       final animation = particle.tween.transform(progress);
-      final position =
-          Offset(animation["x"] * size.width, animation["y"] * size.height);
+      final position = Offset(
+          animation.get('x') * size.width, animation.get('y') * size.height);
       canvas.drawCircle(position, size.width * 0.2 * particle.size, paint);
     });
   }

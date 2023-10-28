@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 
 class BackGroundImage extends StatelessWidget {
   const BackGroundImage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Container(
+      child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/img/lights_full.jpg"),

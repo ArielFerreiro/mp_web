@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_web_libraries_in_flutter
+
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'translate_hover.dart';
@@ -11,14 +13,15 @@ extension HoverExtensions on Widget {
       child: this,
       // When the mouse enters the widget set the cursor to pointer
       onHover: (event) {
-        appContainer.style.cursor = 'pointer';
+        appContainer!.style.cursor = 'pointer';
       },
       // When it exits set it back to default
       onExit: (event) {
-        appContainer.style.cursor = 'default';
+        appContainer!.style.cursor = 'default';
       },
     );
   }
+
   Widget get moveUpOnHover {
     return TranslateOnHover(
       child: this,

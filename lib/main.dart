@@ -1,4 +1,3 @@
-  
 import 'package:flutter/material.dart';
 import 'views/home/home_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,8 +17,8 @@ class WebPageApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-          const Locale('en', ''),
-          const Locale('es', ''),
+        const Locale('en', ''),
+        const Locale('es', ''),
       ],
       home: HomePage(),
       theme: _theme(),
@@ -31,8 +30,8 @@ class WebPageApp extends StatelessWidget {
 
     return lightTheme.copyWith(
         textTheme: lightTheme.textTheme.copyWith(
-            bodyText1: lightTheme.textTheme.bodyText1.copyWith(height: 1.25),
-            bodyText2: lightTheme.textTheme.bodyText2
+            bodyLarge: lightTheme.textTheme.bodyLarge!.copyWith(height: 1.25),
+            bodyMedium: lightTheme.textTheme.bodyMedium!
                 .copyWith(height: 1.25, fontWeight: FontWeight.w800)),
         appBarTheme: AppBarTheme(color: Color.fromARGB(255, 30, 30, 30)));
   }

@@ -8,7 +8,7 @@ import 'package:mp_web/widgets/link_button.dart';
 // date: 04-Apr-2020
 
 class ContactInfo extends StatelessWidget {
-  const ContactInfo({Key key}) : super(key: key);
+  const ContactInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,21 @@ class ContactInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-            LinkButton(icon: Icon(Icons.mail), url: 'mailto://ariel.ferreiro@gmail.com',),
-            LinkButton(icon: Icon(ContactIcons.github), url: 'https://github.com/ArielFerreiro'),
-            LinkButton(icon: Icon(ContactIcons.linkedin_squared), url: 'https://www.linkedin.com/in/arielferreiro/'),
-            LinkButton(icon: Icon(ContactIcons.twitter), url: 'https://twitter.com/riel0k'),
+          LinkButton(
+            icon: Icon(Icons.mail),
+            url: Uri(path: 'mailto://ariel.ferreiro@gmail.com'),
+          ),
+          LinkButton(
+              icon: Icon(ContactIcons.github),
+              url: Uri(path: 'https://github.com/ArielFerreiro')),
+          LinkButton(
+              icon: Icon(ContactIcons.linkedin_squared),
+              url: Uri(path: 'https://www.linkedin.com/in/arielferreiro/')),
+          LinkButton(
+              icon: Icon(ContactIcons.twitter),
+              url: Uri(path: 'https://twitter.com/riel0k')),
         ],
       ),
     );
   }
-
 }
